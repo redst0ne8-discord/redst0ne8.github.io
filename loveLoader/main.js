@@ -339,3 +339,14 @@ function rebuildTree() {
   container.innerHTML = "";
   renderTree(tree, container);
 }
+
+jsObject.defineProperty(window, '_loveFiles', {
+  get() {
+    const out = {};
+    const decoder = new TextDecoder('utf-8');
+    for (const [name, file] of Object.entries(files)) {
+      out[name] = decoder.decode(file.bytes);
+    }
+    return out;
+  }
+});
